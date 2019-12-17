@@ -1,4 +1,64 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+import { fonts, colors } from "./styles/constants";
+
+const SearchContainer = styled.div`
+  display: block;
+  text-align: center;
+`;
+
+const Input = styled.input`
+  border-style: none;
+  width: 250px;
+  height: 40px;
+  border-radius: 5px;
+  transition: all 0.4s;
+  padding-left: 15px;
+  font-size: 18px;
+
+  &:hover {
+    background-color: ${colors.lightgray};
+  }
+
+  &:focus {
+    width: 400px;
+  }
+`;
+
+const Type = styled.div`
+  margin-top: 10px;
+  display: inline-flex;
+  font-size: 20px;
+  color: white;
+`;
+
+const TypeLabel = styled.label`
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+`;
+
+const TypeInput = styled.input`
+  margin: 2px 10px;
+  cursor: pointer;
+`;
+
+const Button = styled.button`
+  margin-top: 15px;
+  ${fonts.wendyOne};
+  font-size: 20px;
+  background-color: ${colors.primary};
+  border-style: none;
+  width: 200px;
+  height: 40px;
+  cursor: pointer;
+  transition: 0.4s all;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: ${colors.neonpink};
+  }
+`;
 
 export default class Search extends Component {
   constructor(props) {
@@ -22,36 +82,39 @@ export default class Search extends Component {
   render() {
     const { onTypeChange, type } = this.props;
     return (
-      <div>
+      <SearchContainer>
         <form onSubmit={this.onSearchSubmit}>
-          <input
+          <Input
+            placeholder="Search all Gifs and Stickers"
             type="text"
             value={this.state.searchTerm}
             onChange={this.onInputChange}
-          ></input>
-          <fieldset>
-            <legend>Search Type:</legend>
-            <input
+          ></Input>
+          <Type>
+            <legend>Type:</legend>
+            <TypeInput
               id="gifs"
               onChange={onTypeChange}
               type="radio"
               value="gifs"
               checked={type === "gifs"}
-            ></input>
-            <label htmlFor="gifs">Gifs</label>
+            ></TypeInput>
+            <TypeLabel htmlFor="gifs">Gifs</TypeLabel>
             <br></br>
-            <input
+            <TypeInput
               id="stickers"
               onChange={onTypeChange}
               type="radio"
               value="stickers"
               checked={type === "stickers"}
-            ></input>
-            <label htmlFor="stickers">Stickers</label>
-          </fieldset>
-          <button type="submit">Search</button>
+            ></TypeInput>
+            <TypeLabel htmlFor="stickers">Stickers</TypeLabel>
+          </Type>
+          <div>
+            <Button type="submit">Gif-me!</Button>
+          </div>
         </form>
-      </div>
+      </SearchContainer>
     );
   }
 }

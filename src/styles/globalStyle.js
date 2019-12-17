@@ -1,9 +1,9 @@
 import { createGlobalStyle } from "styled-components";
-import { fonts } from "./constants";
+import { fonts, colors } from "./constants";
 
 const GlobalStyle = createGlobalStyle`
 body {
-	/* background-color: rgb(20, 20, 20); */
+	background-color: ${colors.dark};
 	margin: 0;
 	padding: 0;
 	${fonts.wendyOne};

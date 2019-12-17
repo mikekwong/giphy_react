@@ -7,12 +7,11 @@ import GlobalStyle from "./styles/globalStyle";
 import { colors } from "./styles/constants";
 
 const Headline = styled.h1`
-  font-size: 60px;
+  font-size: 80px;
   letter-spacing: 1px;
   text-align: center;
-  color: ${colors.headline};
-  padding: 50px;
-  background-color: rgb(20, 20, 20);
+  color: ${colors.primary};
+  padding: 10px;
 `;
 
 const Loading = styled.p`
@@ -89,7 +88,7 @@ export default class App extends Component {
     return (
       <>
         <GlobalStyle />
-        <Headline>Search</Headline>
+        <Headline>Gif-It!</Headline>
         <Search
           onSubmit={this.onSearchSubmit}
           onTypeChange={this.onTypeChange}
