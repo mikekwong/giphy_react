@@ -12,11 +12,14 @@ export default class App extends Component {
       isLoading: true,
       error: null,
       type: "gifs",
-      noResults: false
+      noResults: false,
+      searchSubmitted: false
     };
   }
 
   onSearchSubmit = async searchTerm => {
+    this.setState({ searchSubmitted: true, error: null });
+
     try {
       const { data } = await giphy.get(
         `${this.state.type}/search?q=${searchTerm}&api_key=${API_KEY}&limit=20`
@@ -32,6 +35,8 @@ export default class App extends Component {
         isLoading: false
       });
     }
+
+    this.setState({ isLoading: true, searchSubmitted: false });
   };
 
   onTypeChange = e => {
@@ -41,7 +46,21 @@ export default class App extends Component {
   };
 
   render() {
-    const { isLoading, results, type, noResults } = this.state;
+    const {
+      isLoading,
+      results,
+      type,
+      noResults,
+      error,
+      searchSubmitted
+    } = this.state;
+
+    const renderResults = !error ? (
+      <ResultsList results={results} noResults={noResults} />
+    ) : (
+      <div>There was a network error: {error}</div>
+    );
+
     return (
       <div>
         <Search
@@ -50,7 +69,11 @@ export default class App extends Component {
           type={type}
         />
         <br />
-        <ResultsList results={results} noResults={noResults} />
+        {isLoading && searchSubmitted ? (
+          <div>...loading...</div>
+        ) : (
+          renderResults
+        )}
       </div>
     );
   }
