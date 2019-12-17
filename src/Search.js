@@ -8,7 +8,7 @@ export default class Search extends Component {
     };
   }
 
-  onFormSubmit = e => {
+  onSearchSubmit = e => {
     e.preventDefault();
     this.props.onSubmit(this.state.searchTerm);
   };
@@ -23,7 +23,7 @@ export default class Search extends Component {
     const { onTypeChange, type } = this.props;
     return (
       <div>
-        <form onSubmit={this.onFormSubmit}>
+        <form onSubmit={this.onSearchSubmit}>
           <input
             type="text"
             value={this.state.searchTerm}

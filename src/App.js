@@ -2,7 +2,32 @@ import React, { Component } from "react";
 import Search from "./Search";
 import giphy, { API_KEY } from "./api/giphy";
 import ResultsList from "./ResultsList";
-import "./App.css";
+import styled from "styled-components";
+import GlobalStyle from "./styles/globalStyle";
+import { colors } from "./styles/constants";
+
+const Headline = styled.h1`
+  font-size: 60px;
+  letter-spacing: 1px;
+  text-align: center;
+  color: ${colors.headline};
+  padding: 50px;
+  background-color: rgb(20, 20, 20);
+`;
+
+const Loading = styled.p`
+  color: ${colors.loading};
+  font-size: 25px;
+  margin-top: 100px;
+  text-align: center;
+`;
+
+const Error = styled.p`
+  color: ${colors.error};
+  font-size: 20px;
+  margin-top: 100px;
+  text-align: center;
+`;
 
 export default class App extends Component {
   constructor(props) {
@@ -58,11 +83,13 @@ export default class App extends Component {
     const renderResults = !error ? (
       <ResultsList results={results} noResults={noResults} />
     ) : (
-      <div>There was a network error: {error}</div>
+      <Error>There was a network error: {error}</Error>
     );
 
     return (
-      <div>
+      <>
+        <GlobalStyle />
+        <Headline>Search</Headline>
         <Search
           onSubmit={this.onSearchSubmit}
           onTypeChange={this.onTypeChange}
@@ -70,11 +97,11 @@ export default class App extends Component {
         />
         <br />
         {isLoading && searchSubmitted ? (
-          <div>...loading...</div>
+          <Loading>...loading...</Loading>
         ) : (
           renderResults
         )}
-      </div>
+      </>
     );
   }
 }
