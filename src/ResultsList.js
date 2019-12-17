@@ -1,5 +1,20 @@
 import React, { Component } from "react";
 import Result from "./Result";
+import styled from "styled-components";
+
+const ResultContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 50px;
+  width: auto;
+  text-align: center;
+`;
+
+const ResultsText = styled.h2`
+  color: white;
+  letter-spacing: 1px;
+`;
 
 export default class ResultsList extends Component {
   render() {
@@ -9,8 +24,13 @@ export default class ResultsList extends Component {
       <Result key={result.id} result={result} />
     ));
 
-    const notFound = <div>No results.</div>;
+    const notFound = <p>No results.</p>;
 
-    return <>{noResults ? notFound : resultsList}</>;
+    return (
+      <ResultContainer>
+        <ResultsText>Results:</ResultsText>
+        {noResults ? notFound : resultsList}
+      </ResultContainer>
+    );
   }
 }

@@ -1,4 +1,10 @@
 import React from "react";
+import styled from "styled-components";
+
+const Image = styled.img`
+  object-fit: contain;
+  margin: 10px 0;
+`;
 
 const Result = ({
   result: {
@@ -9,9 +15,9 @@ const Result = ({
   }
 }) => {
   return (
-    <div>
-      <img src={url} alt={title} />
-    </div>
+    <>
+      <Image src={url} alt={title} />
+    </>
   );
 };
 
