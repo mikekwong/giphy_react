@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Search from "./Search";
 import giphy, { API_KEY } from "./api/giphy";
 import "./App.css";
 
@@ -8,14 +9,15 @@ export default class App extends Component {
     this.state = {
       results: [],
       isLoading: true,
-      error: null
+      error: null,
+      type: "gifs"
     };
   }
 
   onSearchSubmit = async searchTerm => {
     try {
       const { data } = await giphy.get(
-        `gifs/search?q=${searchTerm}&api_key=${API_KEY}&limit=20`
+        `${this.state.type}/search?q=${searchTerm}&api_key=${API_KEY}&limit=20`
       );
       this.setState({
         results: data.items,
@@ -29,8 +31,22 @@ export default class App extends Component {
     }
   };
 
+  onTypeChange = e => {
+    this.setState({
+      type: e.target.value
+    });
+  };
+
   render() {
-    const { isLoading, results } = this.state;
-    return <div></div>;
+    const { isLoading, results, type } = this.state;
+    return (
+      <div>
+        <Search
+          onSubmit={this.onSearchSubmit}
+          onTypeChange={this.onTypeChange}
+          type={type}
+        />
+      </div>
+    );
   }
 }
