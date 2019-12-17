@@ -88,7 +88,7 @@ export default class App extends Component {
     return (
       <>
         <GlobalStyle />
-        <Headline>Gif-It!</Headline>
+        <Headline>Gif-it!</Headline>
         <Search
           onSubmit={this.onSearchSubmit}
           onTypeChange={this.onTypeChange}

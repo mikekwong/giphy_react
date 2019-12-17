@@ -51,6 +51,7 @@ const Button = styled.button`
   border-style: none;
   width: 200px;
   height: 40px;
+  padding-top: 2px;
   cursor: pointer;
   transition: 0.4s all;
   border-radius: 5px;
@@ -111,7 +112,7 @@ export default class Search extends Component {
             <TypeLabel htmlFor="stickers">Stickers</TypeLabel>
           </Type>
           <div>
-            <Button type="submit">Gif-me!</Button>
+            <Button type="submit">Gif-it-to-me!</Button>
           </div>
         </form>
       </SearchContainer>
