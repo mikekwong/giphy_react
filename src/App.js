@@ -10,7 +10,8 @@ export default class App extends Component {
       results: [],
       isLoading: true,
       error: null,
-      type: "gifs"
+      type: "gifs",
+      noResults: false
     };
   }
 
@@ -20,9 +21,11 @@ export default class App extends Component {
         `${this.state.type}/search?q=${searchTerm}&api_key=${API_KEY}&limit=20`
       );
       this.setState({
-        results: data.items,
-        isLoading: false
+        results: data,
+        isLoading: false,
+        noResults: data.pagination.total_count ? false : true
       });
+      console.log(data);
     } catch (error) {
       this.setState({
         error,
@@ -38,6 +41,7 @@ export default class App extends Component {
   };
 
   render() {
+    console.log(this.state.noResults);
     const { isLoading, results, type } = this.state;
     return (
       <div>
@@ -46,6 +50,7 @@ export default class App extends Component {
           onTypeChange={this.onTypeChange}
           type={type}
         />
+        <br />
       </div>
     );
   }
