@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Search from "./Search";
 import giphy, { API_KEY } from "./api/giphy";
+import ResultsList from "./ResultsList";
 import "./App.css";
 
 export default class App extends Component {
@@ -21,11 +22,10 @@ export default class App extends Component {
         `${this.state.type}/search?q=${searchTerm}&api_key=${API_KEY}&limit=20`
       );
       this.setState({
-        results: data,
+        results: data.data,
         isLoading: false,
         noResults: data.pagination.total_count ? false : true
       });
-      console.log(data);
     } catch (error) {
       this.setState({
         error,
@@ -41,8 +41,7 @@ export default class App extends Component {
   };
 
   render() {
-    console.log(this.state.noResults);
-    const { isLoading, results, type } = this.state;
+    const { isLoading, results, type, noResults } = this.state;
     return (
       <div>
         <Search
@@ -51,6 +50,7 @@ export default class App extends Component {
           type={type}
         />
         <br />
+        <ResultsList results={results} />
       </div>
     );
   }
