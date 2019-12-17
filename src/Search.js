@@ -49,6 +49,7 @@ export default class Search extends Component {
             ></input>
             <label htmlFor="stickers">Stickers</label>
           </fieldset>
+          <button type="submit">Search</button>
         </form>
       </div>
     );

@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 
 export const colors = {
-  headline: "#FFF",
+  headline: "#00f39a",
   loading: "#2d79be",
   error: "#f9756e",
   none: "#444"
