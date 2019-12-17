@@ -50,7 +50,7 @@ export default class App extends Component {
           type={type}
         />
         <br />
-        <ResultsList results={results} />
+        <ResultsList results={results} noResults={noResults} />
       </div>
     );
   }
