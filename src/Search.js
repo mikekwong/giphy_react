@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import media from "./styles/media";
 import { fonts, colors } from "./styles/constants";
 
 const SearchContainer = styled.div`
@@ -8,6 +9,7 @@ const SearchContainer = styled.div`
 `;
 
 const Input = styled.input`
+
   border-style: none;
   width: 250px;
   height: 40px;
@@ -21,8 +23,33 @@ const Input = styled.input`
   }
 
   &:focus {
-    width: 400px;
+    width: 300px;
+	}
+
+	${media.mobileLandscape`
+	width: 350px;
+	&:focus {
+    width: 450px;
   }
+	`}
+  ${media.tabletPortrait`
+	width: 550px;
+	&:focus {
+    width: 650px;
+  }
+	`}
+  ${media.tabletLandscape`
+	width: 750px;
+	&:focus {
+    width: 850px;
+  }
+	`}
+  ${media.laptops`
+	width: 950px;
+	&:focus {
+    width: 1050px;
+  }
+	`}
 `;
 
 const Type = styled.div`
