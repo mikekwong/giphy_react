@@ -27,9 +27,11 @@ const Input = styled.input`
 
 const Type = styled.div`
   margin-top: 10px;
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   font-size: 20px;
   color: white;
+  width: 100%;
 `;
 
 const TypeLabel = styled.label`
