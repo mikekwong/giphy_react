@@ -7,7 +7,8 @@ export const colors = {
   none: "#444",
   lightgray: "#E5E5E5",
   dark: "#141414",
-  neonpink: "#F2279F"
+  neonpink: "#F2279F",
+  warning: "#FFBD00 "
 };
 
 export const fonts = {

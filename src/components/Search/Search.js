@@ -76,6 +76,10 @@ const TypeInput = styled.input`
   cursor: pointer;
 `;
 
+const Warning = styled.p`
+  color: ${colors.warning};
+`;
+
 const Button = styled.button`
   margin-top: 15px;
   ${fonts.wendyOne};
@@ -98,13 +102,19 @@ export default class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchTerm: ""
+      searchTerm: "",
+      hasSubmitted: null
     };
   }
 
   onSearchSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.searchTerm);
+    if (this.state.searchTerm) {
+      this.setState({ hasSubmitted: true });
+      this.props.onSubmit(this.state.searchTerm);
+    } else {
+      this.setState({ hasSubmitted: false });
+    }
   };
 
   onInputChange = e => {
@@ -115,6 +125,12 @@ export default class Search extends Component {
 
   render() {
     const { onTypeChange, type } = this.props;
+    const { hasSubmitted } = this.state;
+
+    const validation = hasSubmitted === false && (
+      <Warning>This field can't be empty!</Warning>
+    );
+
     return (
       <SearchContainer>
         <form onSubmit={this.onSearchSubmit}>
@@ -124,6 +140,7 @@ export default class Search extends Component {
             value={this.state.searchTerm}
             onChange={this.onInputChange}
           ></Input>
+          {validation}
           <Type>
             <legend>Type:</legend>
             <TypeInput
