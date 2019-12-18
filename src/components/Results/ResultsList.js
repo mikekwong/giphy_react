@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Result from "./Result";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import media from "../../styles/media";
 
 const ResultContainer = styled.div`
@@ -19,10 +19,15 @@ const ResultContainer = styled.div`
 	`}
 `;
 
-const ResultsText = styled.h2`
+const Text = styled.h2`
   color: white;
   width: 100%;
-  letter-spacing: 1px;
+
+  ${props =>
+    props.resultsText &&
+    css`
+      font-size: 30px;
+    `}
 `;
 
 export default class ResultsList extends Component {
@@ -33,11 +38,11 @@ export default class ResultsList extends Component {
       <Result key={result.id} result={result} />
     ));
 
-    const notFound = <p>No results.</p>;
+    const notFound = <Text>None found.</Text>;
 
     return (
       <ResultContainer>
-        <ResultsText>Results:</ResultsText>
+        <Text resultsText>Results:</Text>
         {noResults ? notFound : resultsList}
       </ResultContainer>
     );

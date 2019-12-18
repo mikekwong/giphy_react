@@ -2,30 +2,29 @@ import React, { Component } from "react";
 import Search from "./Search/Search";
 import giphy, { API_KEY } from "../api/giphy";
 import ResultsList from "./Results/ResultsList";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import GlobalStyle from "../styles/globalStyle";
 import { colors } from "../styles/constants";
 
 const Headline = styled.h1`
   font-size: 80px;
-  letter-spacing: 1px;
   text-align: center;
   color: ${colors.primary};
   padding: 10px;
 `;
 
-const Loading = styled.p`
+const StatusLoading = styled.p`
   color: ${colors.loading};
   font-size: 25px;
   margin-top: 100px;
   text-align: center;
-`;
 
-const Error = styled.p`
-  color: ${colors.error};
-  font-size: 20px;
-  margin-top: 100px;
-  text-align: center;
+  ${props =>
+    props.error &&
+    css`
+      color: ${colors.error};
+      font-size: 20px;
+    `}
 `;
 
 export default class App extends Component {
@@ -82,7 +81,7 @@ export default class App extends Component {
     const renderResults = !error ? (
       <ResultsList results={results} noResults={noResults} />
     ) : (
-      <Error>There was a network error: {error}</Error>
+      <StatusLoading error>There was a network error: {error}</StatusLoading>
     );
 
     return (
@@ -96,7 +95,7 @@ export default class App extends Component {
         />
         <br />
         {isLoading && searchSubmitted ? (
-          <Loading>...loading...</Loading>
+          <StatusLoading>...loading...</StatusLoading>
         ) : (
           renderResults
         )}
