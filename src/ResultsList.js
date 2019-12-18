@@ -2,18 +2,26 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Result from "./Result";
 import styled from "styled-components";
+import media from "./styles/media";
 
 const ResultContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 50px;
+  margin: 25px;
   width: auto;
   text-align: center;
+  width: 100;
+
+  ${media.mobileLandscape`
+	flex-direction: row;
+	flex-wrap: wrap;
+	`}
 `;
 
 const ResultsText = styled.h2`
   color: white;
+  width: 100%;
   letter-spacing: 1px;
 `;
 

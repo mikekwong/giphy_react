@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Image = styled.img`
   object-fit: contain;
-  margin: 10px 0;
+  margin: 10px;
 `;
 
 const Result = ({

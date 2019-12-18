@@ -33,18 +33,21 @@ const Input = styled.input`
     width: 450px;
   }
 	`}
+
   ${media.tabletPortrait`
 	width: 550px;
 	&:focus {
     width: 650px;
   }
 	`}
+
   ${media.tabletLandscape`
 	width: 750px;
 	&:focus {
     width: 850px;
   }
 	`}
+
   ${media.laptops`
 	width: 950px;
 	&:focus {
