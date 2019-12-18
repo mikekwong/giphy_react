@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import Result from "./Result";
 import styled from "styled-components";
 
@@ -34,3 +35,8 @@ export default class ResultsList extends Component {
     );
   }
 }
+
+ResultsList.propTypes = {
+  results: PropTypes.array.isRequired,
+  noResults: PropTypes.bool.isRequired
+};

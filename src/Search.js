@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import media from "./styles/media";
 import { fonts, colors } from "./styles/constants";
@@ -150,3 +151,8 @@ export default class Search extends Component {
     );
   }
 }
+
+Search.propTypes = {
+  type: PropTypes.oneOf(["gifs", "stickers"]).isRequired,
+  onTypeChange: PropTypes.func.isRequired
+};
