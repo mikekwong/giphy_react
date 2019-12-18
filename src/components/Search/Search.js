@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import media from "./styles/media";
-import { fonts, colors } from "./styles/constants";
+import media from "../../styles/media";
+import { fonts, colors } from "../../styles/constants";
 
 const SearchContainer = styled.div`
   display: block;

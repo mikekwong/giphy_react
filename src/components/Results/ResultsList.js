@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Result from "./Result";
 import styled from "styled-components";
-import media from "./styles/media";
+import media from "../../styles/media";
 
 const ResultContainer = styled.div`
   display: flex;

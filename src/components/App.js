@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Search from "./Search";
-import giphy, { API_KEY } from "./api/giphy";
-import ResultsList from "./ResultsList";
+import Search from "./Search/Search";
+import giphy, { API_KEY } from "../api/giphy";
+import ResultsList from "./Results/ResultsList";
 import styled from "styled-components";
-import GlobalStyle from "./styles/globalStyle";
-import { colors } from "./styles/constants";
+import GlobalStyle from "../styles/globalStyle";
+import { colors } from "../styles/constants";
 
 const Headline = styled.h1`
   font-size: 80px;
