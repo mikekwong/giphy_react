@@ -112,7 +112,9 @@ export default class Search extends Component {
             <TypeLabel htmlFor="stickers">Stickers</TypeLabel>
           </Type>
           <div>
-            <Button type="submit">Gif-it-to-me!</Button>
+            <Button type="submit">
+              {type === "gifs" ? "Gif-it-to-me!" : "I love Stickers!"}
+            </Button>
           </div>
         </form>
       </SearchContainer>
