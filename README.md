@@ -7,7 +7,11 @@ This install package includes NodeJS and NPM executables.
 
 ### `Navigate to project directory in terminal`
 
-If you open your terminal you may drag and drop the project folder into terminal and hit Enter/Return which will automatically navigate to its directory in your local system. Or you may navigate manually within terminal depending on the path you've placed the project folder.<br>
+If you open your terminal you may drag and drop the project folder into terminal and hit Enter/Return which will automatically navigate to its directory in your local system.<br>
+
+Or you may navigate manually within terminal depending on the path you've placed the project folder.<br>
+
+### `npm install`
 
 Afterwards in terminal you may type 'npm install' and hit the Enter/Return key.<br>
 
