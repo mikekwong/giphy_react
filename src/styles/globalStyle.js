@@ -9,8 +9,6 @@ body {
 	${fonts.wendyOne};
 	-webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-`;
+}`;
 
 export default GlobalStyle;
