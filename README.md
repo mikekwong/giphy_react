@@ -17,7 +17,7 @@ Afterwards in terminal you may type 'npm install' and hit the Enter/Return key.<
 
 This will install all necessary dependencies to run the project.<br>
 
-In the project directory, you can run:<br>
+Once all dependencies are installed: in the project directory, you can run:<br>
 
 ### `npm start`
 
