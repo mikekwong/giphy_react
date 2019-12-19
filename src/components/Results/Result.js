@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Image = styled.img`
@@ -9,6 +10,7 @@ const Image = styled.img`
 
 const Result = ({
   result: {
+    id,
     title,
     images: {
       fixed_height_downsampled: { url }
@@ -17,7 +19,9 @@ const Result = ({
 }) => {
   return (
     <>
-      <Image src={url} alt={title} />
+      <Link to={`/gifs/${id}`}>
+        <Image src={url} alt={title} />
+      </Link>
     </>
   );
 };
