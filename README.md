@@ -23,7 +23,7 @@ Once all dependencies are installed: in the project directory, you can run:<br>
 
 In terminal, please type: 'npm start'.<br>
 
-Runs the app in the development mode locally on your computer.<br>
+The command you just entered in terminal will launch the app in development mode locally on your computer.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in any browser.
 
 The page will hot reload if you make edits to the source code.<br>
