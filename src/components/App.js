@@ -43,9 +43,12 @@ const Page = styled.span`
     props.number &&
     css`
       cursor: pointer;
+
       &:hover {
         color: #fff;
       }
+
+      ${({ active }) => active && `font-size: 60px`}
     `}
 `;
 
@@ -149,7 +152,7 @@ export default class App extends Component {
               <Page
                 number
                 key={number}
-                style={{ fontSize: currentPage === number ? "60px" : "" }}
+                active={currentPage === number}
                 onClick={() => this.onSearchSubmit(searchTerm, number)}
               >
                 {number}
