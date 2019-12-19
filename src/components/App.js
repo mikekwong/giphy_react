@@ -24,7 +24,7 @@ const StatusLoading = styled.p`
     props.error &&
     css`
       color: ${colors.error};
-      font-size: 20px;
+      font-size: 24px;
     `}
 `;
 
@@ -113,6 +113,7 @@ export default class App extends Component {
         error,
         isLoading: false
       });
+      console.error(error);
     }
 
     this.setState({ isLoading: true, searchSubmitted: false });
@@ -166,7 +167,7 @@ export default class App extends Component {
     const renderResults = !error ? (
       <ResultsList results={results} noResults={noResults} />
     ) : (
-      <StatusLoading error>There was a network error: {error}</StatusLoading>
+      <StatusLoading error>There was a network error.</StatusLoading>
     );
     return (
       <>
