@@ -65,6 +65,25 @@ export default class App extends Component {
     };
   }
 
+  componentDidMount() {
+    let data = sessionStorage.getItem("results");
+    this.setState(
+      data !== null
+        ? JSON.parse(data)
+        : {
+            results: [],
+            isLoading: true,
+            error: null,
+            type: "gifs",
+            noResults: false,
+            searchSubmitted: false,
+            searchTerm: "",
+            total: 0,
+            currentPage: 1
+          }
+    );
+  }
+
   onSearchSubmit = async (searchTerm, pageNumber = 1) => {
     this.setState({
       searchSubmitted: true,
@@ -76,13 +95,16 @@ export default class App extends Component {
       const { data } = await giphy.get(
         `${this.state.type}/search?q=${searchTerm}&offset=${pageNumber}&api_key=${API_KEY}`
       );
-      this.setState({
-        results: data.data,
-        total: data.pagination.total_count,
-        currentPage: pageNumber,
-        isLoading: false,
-        noResults: data.pagination.total_count ? false : true
-      });
+      this.setState(
+        {
+          results: data.data,
+          total: data.pagination.total_count,
+          currentPage: pageNumber,
+          isLoading: false,
+          noResults: data.pagination.total_count ? false : true
+        },
+        () => sessionStorage.setItem("results", JSON.stringify(this.state))
+      );
     } catch (error) {
       this.setState({
         error,
@@ -114,7 +136,7 @@ export default class App extends Component {
 
     const pagination = () => {
       const pageNumbers = [];
-      if (total !== null) {
+      if (total > 0) {
         for (let i = 1; i < Math.ceil(total / 25); i++) {
           pageNumbers.push(i);
         }
@@ -124,7 +146,7 @@ export default class App extends Component {
               <Page
                 number
                 key={number}
-                style={{ fontSize: currentPage === number ? "60px" : null }}
+                style={{ fontSize: currentPage === number ? "60px" : "" }}
                 onClick={() => this.onSearchSubmit(searchTerm, number)}
               >
                 {number}

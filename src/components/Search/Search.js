@@ -107,10 +107,24 @@ export default class Search extends Component {
     };
   }
 
+  componentDidMount() {
+    let data = sessionStorage.getItem("query");
+    this.setState(
+      data !== null
+        ? JSON.parse(data)
+        : {
+            searchTerm: "",
+            hasSubmitted: null
+          }
+    );
+  }
+
   onSearchSubmit = e => {
     e.preventDefault();
     if (this.state.searchTerm) {
-      this.setState({ hasSubmitted: true });
+      this.setState({ hasSubmitted: true }, () =>
+        sessionStorage.setItem("query", JSON.stringify(this.state))
+      );
       this.props.onSubmit(this.state.searchTerm);
     } else {
       this.setState({ hasSubmitted: false });
