@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Result from "./Result";
 import styled, { css } from "styled-components";
@@ -30,26 +30,24 @@ const Text = styled.h2`
     `}
 `;
 
-export default class ResultsList extends Component {
-  render() {
-    const { results, noResults } = this.props;
+const ResultsList = ({ results, noResults }) => {
+  const resultsList = results.map(result => (
+    <Result key={result.id} result={result} />
+  ));
 
-    const resultsList = results.map(result => (
-      <Result key={result.id} result={result} />
-    ));
+  const notFound = <Text>None found.</Text>;
 
-    const notFound = <Text>None found.</Text>;
-
-    return (
-      <ResultContainer>
-        <Text resultsText>Results:</Text>
-        {noResults ? notFound : resultsList}
-      </ResultContainer>
-    );
-  }
-}
+  return (
+    <ResultContainer>
+      <Text resultsText>Results:</Text>
+      {noResults ? notFound : resultsList}
+    </ResultContainer>
+  );
+};
 
 ResultsList.propTypes = {
   results: PropTypes.array.isRequired,
   noResults: PropTypes.bool.isRequired
 };
+
+export default ResultsList;

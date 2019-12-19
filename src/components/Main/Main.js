@@ -11,6 +11,7 @@ const Headline = styled.h1`
   text-align: center;
   color: ${colors.primary};
   padding: 10px;
+  text-decoration: none;
 `;
 
 const StatusLoading = styled.p`
