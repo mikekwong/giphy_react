@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Image = styled.img`
-  object-fit: contain;
+  object-fit: cover;
   margin: 10px;
 `;
 
@@ -12,7 +12,7 @@ const Result = ({
     id,
     title,
     images: {
-      fixed_height_downsampled: { url }
+      fixed_width: { url }
     }
   }
 }) => {
