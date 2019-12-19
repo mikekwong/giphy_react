@@ -60,7 +60,7 @@ export default class App extends Component {
       noResults: false,
       searchSubmitted: false,
       searchTerm: "",
-      total: null,
+      total: 0,
       currentPage: 1
     };
   }
@@ -137,7 +137,10 @@ export default class App extends Component {
     const pagination = () => {
       const pageNumbers = [];
       if (total > 0) {
-        for (let i = 1; i < Math.ceil(total / 25); i++) {
+        // Artificially limit the number of pages for pagination for this project.
+        // Otherwise upper limit would be total pages / results per page.
+        for (let i = 1; i < Math.ceil(total / 200); i++) {
+          console.log(i);
           pageNumbers.push(i);
         }
         return pageNumbers.map(number => {
