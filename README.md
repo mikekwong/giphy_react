@@ -21,6 +21,8 @@ Once all dependencies are installed: in the project directory, you can run:<br>
 
 ### `Step 4: npm start`
 
+In terminal, please type: 'npm start'.<br>
+
 Runs the app in the development mode locally on your computer.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in any browser.
 
