@@ -37,13 +37,14 @@ const Page = styled.span`
   color: #fff;
   margin: 0 10px;
   font-size: 30px;
+  color: ${colors.neonpink};
 
   ${props =>
     props.number &&
     css`
       cursor: pointer;
       &:hover {
-        color: ${colors.neonpink};
+        color: #fff;
       }
     `}
 `;
@@ -118,13 +119,12 @@ export default class App extends Component {
           pageNumbers.push(i);
         }
         return pageNumbers.map(number => {
-          // let classes = currentPage === number ?
           if (number >= currentPage - 2 && number <= currentPage + 2) {
-            console.log(number, total);
             return (
               <Page
                 number
                 key={number}
+                style={{ fontSize: currentPage === number ? "60px" : null }}
                 onClick={() => this.onSearchSubmit(searchTerm, number)}
               >
                 {number}
