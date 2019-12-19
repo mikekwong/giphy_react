@@ -12,7 +12,7 @@ const Result = ({
     id,
     title,
     images: {
-      fixed_width: { url }
+      fixed_width_downsampled: { url }
     }
   }
 }) => {

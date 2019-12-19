@@ -28,6 +28,26 @@ const StatusLoading = styled.p`
     `}
 `;
 
+const PageNumbersContainer = styled.div`
+  text-align: center;
+  margin: 80px 0 0 0;
+`;
+
+const Page = styled.span`
+  color: #fff;
+  margin: 0 10px;
+  font-size: 30px;
+
+  ${props =>
+    props.number &&
+    css`
+      cursor: pointer;
+      &:hover {
+        color: ${colors.neonpink};
+      }
+    `}
+`;
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -37,19 +57,28 @@ export default class App extends Component {
       error: null,
       type: "gifs",
       noResults: false,
-      searchSubmitted: false
+      searchSubmitted: false,
+      searchTerm: "",
+      total: null,
+      currentPage: 1
     };
   }
 
-  onSearchSubmit = async searchTerm => {
-    this.setState({ searchSubmitted: true, error: null });
+  onSearchSubmit = async (searchTerm, pageNumber = 1) => {
+    this.setState({
+      searchSubmitted: true,
+      error: null,
+      searchTerm: searchTerm
+    });
 
     try {
       const { data } = await giphy.get(
-        `${this.state.type}/search?q=${searchTerm}&api_key=${API_KEY}&limit=20`
+        `${this.state.type}/search?q=${searchTerm}&offset=${pageNumber}&api_key=${API_KEY}`
       );
       this.setState({
         results: data.data,
+        total: data.pagination.total_count,
+        currentPage: pageNumber,
         isLoading: false,
         noResults: data.pagination.total_count ? false : true
       });
@@ -76,15 +105,41 @@ export default class App extends Component {
       type,
       noResults,
       error,
-      searchSubmitted
+      searchSubmitted,
+      searchTerm,
+      total,
+      currentPage
     } = this.state;
+
+    const pagination = () => {
+      const pageNumbers = [];
+      if (total !== null) {
+        for (let i = 1; i < Math.ceil(total / 25); i++) {
+          pageNumbers.push(i);
+        }
+        return pageNumbers.map(number => {
+          // let classes = currentPage === number ?
+          if (number >= currentPage - 2 && number <= currentPage + 2) {
+            console.log(number, total);
+            return (
+              <Page
+                number
+                key={number}
+                onClick={() => this.onSearchSubmit(searchTerm, number)}
+              >
+                {number}
+              </Page>
+            );
+          }
+        });
+      }
+    };
 
     const renderResults = !error ? (
       <ResultsList results={results} noResults={noResults} />
     ) : (
       <StatusLoading error>There was a network error: {error}</StatusLoading>
     );
-
     return (
       <>
         <GlobalStyle />
@@ -94,6 +149,13 @@ export default class App extends Component {
           onTypeChange={this.onTypeChange}
           type={type}
         />
+        {results.length && (
+          <PageNumbersContainer>
+            <Page>&laquo;</Page>
+            {pagination()}
+            <Page>&raquo;</Page>
+          </PageNumbersContainer>
+        )}
         <br />
         {isLoading && searchSubmitted ? (
           <StatusLoading>...loading...</StatusLoading>

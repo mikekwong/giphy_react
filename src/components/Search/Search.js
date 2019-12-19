@@ -125,7 +125,7 @@ export default class Search extends Component {
 
   render() {
     const { onTypeChange, type } = this.props;
-    const { hasSubmitted } = this.state;
+    const { hasSubmitted, searchTerm } = this.state;
 
     const validation = hasSubmitted === false && (
       <Warning>This field can't be empty!</Warning>
@@ -137,7 +137,7 @@ export default class Search extends Component {
           <Input
             placeholder="Search all Gifs and Stickers"
             type="text"
-            value={this.state.searchTerm}
+            value={searchTerm}
             onChange={this.onInputChange}
           ></Input>
           {validation}
