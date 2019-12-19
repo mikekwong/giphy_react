@@ -1,28 +1,23 @@
-## Available Scripts
+# Available Scripts
 
-In the project directory, you can run:
+### `Instructions to run the web app locally`
+
+Download and install NodeJS from https://nodejs.org.
+This install package includes NodeJS and NPM executables.
+
+### `Navigate to project directory in terminal`
+
+If you open your terminal you may drag and drop the project folder into terminal and hit Enter/Return which will automatically navigate to its directory in your local system. Or you may navigate manually within terminal depending on the path you've placed the project folder.<br>
+
+Afterwards in terminal you may type 'npm install' and hit the Enter/Return key.<br>
+
+This will install all necessary dependencies to run the project.<br>
+
+In the project directory, you can run:<br>
 
 ### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Runs the app in the development mode locally on your computer.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in any browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
+The page will hot reload if you make edits to the source code.<br>
