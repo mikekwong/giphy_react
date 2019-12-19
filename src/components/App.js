@@ -140,12 +140,12 @@ export default class App extends Component {
         // Artificially limit the number of pages for pagination for this project.
         // Otherwise upper limit would be total pages / results per page.
         for (let i = 1; i < Math.ceil(total / 200); i++) {
-          console.log(i);
           pageNumbers.push(i);
         }
         return pageNumbers.map(number => {
-          if (number >= currentPage - 2 && number <= currentPage + 2) {
-            return (
+          return (
+            number >= currentPage - 2 &&
+            number <= currentPage + 2 && (
               <Page
                 number
                 key={number}
@@ -154,8 +154,8 @@ export default class App extends Component {
               >
                 {number}
               </Page>
-            );
-          }
+            )
+          );
         });
       }
     };
