@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import media from "../../styles/media";
-import { fonts, colors } from "../../styles/constants";
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import media from '../../styles/media'
+import { fonts, colors } from '../../styles/constants'
 
 const SearchContainer = styled.div`
   display: block;
   text-align: center;
-`;
+`
 
 const Input = styled.input`
 
@@ -54,7 +54,7 @@ const Input = styled.input`
     width: 1050px;
   }
 	`}
-`;
+`
 
 const Type = styled.div`
   margin-top: 10px;
@@ -63,22 +63,22 @@ const Type = styled.div`
   font-size: 20px;
   color: white;
   width: 100%;
-`;
+`
 
 const TypeLabel = styled.label`
   font-size: 20px;
   color: white;
   cursor: pointer;
-`;
+`
 
 const TypeInput = styled.input`
   margin: 2px 10px;
   cursor: pointer;
-`;
+`
 
 const Warning = styled.p`
   color: ${colors.warning};
-`;
+`
 
 const Button = styled.button`
   margin-top: 15px;
@@ -96,97 +96,83 @@ const Button = styled.button`
   &:hover {
     background-color: ${colors.neonpink};
   }
-`;
+`
 
-export default class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchTerm: "",
-      hasSubmitted: null
-    };
-  }
+const Search = ({ onTypeChange, type, onSubmit }) => {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [hasSubmitted, setHasSubmitted] = useState(null)
 
-  componentDidMount() {
-    let data = sessionStorage.getItem("query");
-    this.setState(
-      data !== null
-        ? JSON.parse(data)
-        : {
-            searchTerm: "",
-            hasSubmitted: null
-          }
-    );
-  }
-
-  onSearchSubmit = e => {
-    e.preventDefault();
-    if (this.state.searchTerm) {
-      this.setState({ hasSubmitted: true }, () =>
-        sessionStorage.setItem("query", JSON.stringify(this.state))
-      );
-      this.props.onSubmit(this.state.searchTerm);
+  useEffect(() => {
+    let data = sessionStorage.getItem('query')
+    if (data !== null) {
+      setSearchTerm(JSON.parse(data))
+      setHasSubmitted(JSON.parse(data))
     } else {
-      this.setState({ hasSubmitted: false });
+      setSearchTerm('')
+      setHasSubmitted(null)
     }
-  };
+  }, [])
 
-  onInputChange = e => {
-    this.setState({
-      searchTerm: e.target.value
-    });
-  };
+  const onSearchSubmit = e => {
+    e.preventDefault()
+    if (searchTerm) {
+      setHasSubmitted(true)
 
-  render() {
-    const { onTypeChange, type } = this.props;
-    const { hasSubmitted, searchTerm } = this.state;
+      sessionStorage.setItem('query', JSON.stringify(searchTerm, hasSubmitted))
 
-    const validation = hasSubmitted === false && (
-      <Warning>This field can't be empty!</Warning>
-    );
-
-    return (
-      <SearchContainer>
-        <form onSubmit={this.onSearchSubmit}>
-          <Input
-            placeholder="Search all Gifs and Stickers"
-            type="text"
-            value={searchTerm}
-            onChange={this.onInputChange}
-          ></Input>
-          {validation}
-          <Type>
-            <legend>Type:</legend>
-            <TypeInput
-              id="gifs"
-              onChange={onTypeChange}
-              type="radio"
-              value="gifs"
-              checked={type === "gifs"}
-            ></TypeInput>
-            <TypeLabel htmlFor="gifs">Gifs</TypeLabel>
-            <br></br>
-            <TypeInput
-              id="stickers"
-              onChange={onTypeChange}
-              type="radio"
-              value="stickers"
-              checked={type === "stickers"}
-            ></TypeInput>
-            <TypeLabel htmlFor="stickers">Stickers</TypeLabel>
-          </Type>
-          <div>
-            <Button type="submit">
-              {type === "gifs" ? "Gif-it-to-me!" : "I love Stickers!"}
-            </Button>
-          </div>
-        </form>
-      </SearchContainer>
-    );
+      onSubmit(searchTerm)
+    } else {
+      setHasSubmitted(false)
+    }
   }
+
+  const validation = hasSubmitted === false && (
+    <Warning>This field can't be empty!</Warning>
+  )
+
+  return (
+    <SearchContainer>
+      <form onSubmit={onSearchSubmit}>
+        <Input
+          placeholder='Search all Gifs and Stickers'
+          type='text'
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+        />
+        {validation}
+        <Type>
+          <legend>Type:</legend>
+          <TypeInput
+            id='gifs'
+            onChange={onTypeChange}
+            type='radio'
+            value='gifs'
+            checked={type === 'gifs'}
+          />
+          <TypeLabel htmlFor='gifs'>Gifs</TypeLabel>
+          <br />
+          <TypeInput
+            id='stickers'
+            onChange={onTypeChange}
+            type='radio'
+            value='stickers'
+            checked={type === 'stickers'}
+          />
+          <TypeLabel htmlFor='stickers'>Stickers</TypeLabel>
+        </Type>
+        <div>
+          <Button type='submit'>
+            {type === 'gifs' ? 'Gif-it-to-me!' : 'I love Stickers!'}
+          </Button>
+        </div>
+      </form>
+    </SearchContainer>
+  )
 }
 
 Search.propTypes = {
-  type: PropTypes.oneOf(["gifs", "stickers"]).isRequired,
+  type: PropTypes.oneOf(['gifs', 'stickers']).isRequired,
   onTypeChange: PropTypes.func.isRequired
-};
+}
+
+export default Search
